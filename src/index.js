@@ -1,6 +1,6 @@
 const detail = document.querySelector("div#spice-blend-details")
 const image = document.querySelector("img.detail-image")
-const title = document.querySelector("h2.title")
+const blendTitle = document.querySelector("h2.title")
 const list = document.querySelector("ul.ingredients-list")
 const blendsURL = "http://localhost:3000/spiceblends"
 
@@ -16,7 +16,7 @@ function getBlendDetail(blend){
     image.src = blend.image
     image.alt = blend.title
 
-    title.textContent = blend.title
+    blendTitle.textContent = blend.title
 
     blend.ingredients.forEach(ingredient => {
         const li = document.createElement('li')
@@ -41,7 +41,8 @@ updateForm.addEventListener('submit', event => {
         body: JSON.stringify({title})
     })
     .then(response => response.json())
-    .then(patchedBlend => title.textContent = patchedBlend.title)
+    .then(patchedBlend => blendTitle.textContent = patchedBlend.title)
+    .catch(error => console.log(error))
     updateForm.reset()
 })
     
